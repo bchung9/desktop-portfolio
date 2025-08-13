@@ -4,23 +4,22 @@ let highestZ = 1;
 function openWindow(id) {
   document.getElementById('snd-open').play();
   const w = document.getElementById(id);
-  
-  // Special handling for the welcome window
-  if (id === 'welcome') {
-    const winWidth = 500;
-    const winHeight = 350;
-    const left = (window.innerWidth - winWidth) / 2;
-    const top = (window.innerHeight - winHeight) / 2;
 
-    w.style.width = winWidth + 'px';
-    w.style.height = winHeight + 'px';
-    w.style.left = left + 'px';
-    w.style.top = top + 'px';
-  }
+  // Universal size and centering for all windows
+  const winWidth = 500;
+  const winHeight = 500;
+  const left = (window.innerWidth - winWidth) / 2;
+  const top = (window.innerHeight - winHeight) / 2;
+
+  w.style.width = winWidth + 'px';
+  w.style.height = winHeight + 'px';
+  w.style.left = left + 'px';
+  w.style.top = top + 'px';
 
   w.style.display = 'block';
   w.style.zIndex = ++highestZ;
 }
+
 
 function closeWindow(id) {
   document.getElementById('snd-close').play();
@@ -172,21 +171,35 @@ function restoreWindow(id) {
   w.style.zIndex = ++highestZ;
 }
 
+let windowState = {}; // store original sizes/positions
+
 function maximizeWindow(id) {
   const w = document.getElementById(id);
-  const isMax = w.classList.contains('maximized');
-  if (isMax) {
+
+  if (w.classList.contains('maximized')) {
+    // Unmaximize: restore original position & size
     w.classList.remove('maximized');
-    w.style.width = '300px';
-    w.style.height = 'auto';
-    w.style.top = '100px';
-    w.style.left = '100px';
+    if (windowState[id]) {
+      w.style.top = windowState[id].top;
+      w.style.left = windowState[id].left;
+      w.style.width = windowState[id].width;
+      w.style.height = windowState[id].height;
+    }
   } else {
+    // Save current size & position
+    windowState[id] = {
+      top: w.style.top,
+      left: w.style.left,
+      width: w.style.width,
+      height: w.style.height
+    };
+
+    // Maximize to fill screen
     w.classList.add('maximized');
     w.style.top = '0';
     w.style.left = '0';
     w.style.width = '100vw';
-    w.style.height = 'calc(100vh - 65px)';
+    w.style.height = 'calc(100vh - 65px)'; // leaves room for taskbar
   }
 }
 
@@ -299,3 +312,4 @@ buttonLayout.forEach(row => {
     calcButtonsContainer.appendChild(b);
   });
 });
+

@@ -194,6 +194,9 @@ body::before {
   color: #ddd;
   resize: both;
   overflow: auto;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .title-bar {
   background-color: #0078d7;
@@ -567,3 +570,46 @@ a.link:hover {
   gap: 15px;
 }
 
+/* Contact Section Styling */
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #3a3a3a;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.contact-item:hover {
+  background: #4a4a4a;
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  font-size: 18px;
+  color: #4ea1ff;
+  min-width: 20px;
+}
+
+.contact-link {
+  color: #4ea1ff;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+/* Make email text selectable but nicely aligned */
+#email-text {
+  font-family: monospace;
+  font-size: 16px;
+  color: #ddd;
+}

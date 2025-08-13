@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Windows Desktop Portfolio</title>
+  <title>Brandon's Desktop Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -208,33 +208,28 @@
         <button onclick="closeWindow('contact')">x</button>
       </div>
     </div>
-    <div class="window-content">
-      <i class="fas fa-envelope contact-icon"></i>
-        Email: <span id="email-text">brandontochung@gmail.com</span>
+    <div class="window-content contact-container">
+      <div class="contact-item">
+        <i class="fas fa-envelope contact-icon"></i>
+        <span>Email:</span>
+        <span id="email-text">brandontochung@gmail.com</span>
         <button onclick="copyEmail()" class="copy-btn">📋 Copy</button>
-      <p><i class="fab fa-linkedin contact-icon"></i>
-      LinkedIn: <a href="#" class="link">https://www.linkedin.com/in/brandon-c-b730a3252/</a></p>
-      <p><i class="fab fa-github contact-icon"></i>
-      GitHub: <a href="#" class="link">https://github.com/bchung9</a></p>
-    </div>
-  </div>
-
-  <!-- Paint Window -->
-  <div class="window" id="paint">
-    <div class="title-bar" onmousedown="startDrag(event,'paint')">
-      <span>Paint</span>
-      <div class="window-buttons">
-        <button onclick="minimizeWindow('paint')">-</button>
-        <button onclick="maximizeWindow('paint')">□</button>
-        <button onclick="closeWindow('paint')">x</button>
       </div>
-    </div>
-    <div class="window-content" style="padding: 0;">
-      <canvas id="paint-canvas" width="400" height="300" style="background: white; cursor: crosshair;"></canvas>
-      <div style="padding: 5px; background: #444; color: white; display: flex; gap: 10px; align-items: center;">
-        <label>Color: <input type="color" id="paint-color" value="#000000"></label>
-        <label>Size: <input type="number" id="paint-size" value="3" min="1" max="20" style="width: 50px;"></label>
-        <button onclick="clearCanvas()" style="background: #d32f2f; color: white; border: none; padding: 4px 10px; border-radius: 4px;">Clear</button>
+
+      <div class="contact-item">
+        <i class="fab fa-linkedin contact-icon"></i>
+        <span>LinkedIn:</span>
+        <a href="https://www.linkedin.com/in/brandon-c-b730a3252/" target="_blank" class="contact-link">
+          linkedin.com/in/brandon-c-b730a3252
+        </a>
+      </div>
+
+      <div class="contact-item">
+        <i class="fab fa-github contact-icon"></i>
+        <span>GitHub:</span>
+        <a href="https://github.com/bchung9" target="_blank" class="contact-link">
+          github.com/bchung9
+        </a>
       </div>
     </div>
   </div>
