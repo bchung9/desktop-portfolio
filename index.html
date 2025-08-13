@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows Desktop Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  
+  <!-- Welcome Splash Screen -->
+  <div id="splash">
+    <div class="splash-content">
+      <h1>Welcome to My Portfolio</h1>
+      <div class="loader">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div id="loading-text">Loading... 0%</div>
+      <button id="enter-btn" onclick="startExperience()" disabled>Enter Desktop</button>
+    </div>
+  </div>
+
+  <!-- Desktop -->
+  <div id="desktop" class="hidden-icons">
+    <div class="icon" ondblclick="openWindow('welcome')">
+      <img src="https://img.icons8.com/fluency-systems-regular/48/home.png" />
+      <span>Welcome</span>
+    </div>
+    <div class="icon" ondblclick="openWindow('projects')">
+      <img src="https://img.icons8.com/fluency-systems-regular/48/source-code.png" />
+      <span>Projects</span>
+    </div>
+    <div class="icon" ondblclick="openWindow('resume')">
+      <img src="https://img.icons8.com/fluency-systems-regular/48/resume.png" />
+      <span>Resume</span>
+    </div>
+    <div class="icon" ondblclick="openWindow('contact')">
+      <img src="https://img.icons8.com/fluency-systems-regular/48/send-mass-email.png" />
+      <span>Contact</span>
+    </div>
+    <div class="icon" ondblclick="openWindow('paint')">
+      <img src="https://img.icons8.com/fluency-systems-regular/48/paint-palette.png" />
+      <span>Paint</span>
+    </div>
+    <div class="icon" ondblclick="openWindow('calculator')">
+      <img src="https://img.icons8.com/?size=100&id=ujRmpOIupIsv&format=png&color=000000" />
+      <span>Calculator</span>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <div id="taskbar">
+    <div class="power-button" onclick="shutdownSystem()">
+      <img src="https://img.icons8.com/fluency-systems-filled/24/ffffff/power-off-button.png" alt="Power">
+    </div>
+    <div id="taskbar-apps"></div>
+    <div class="time-display" id="clock"></div>
+  </div>
+
+<!-- Welcome Window -->
+<div class="window" id="welcome">
+  <div class="title-bar" onmousedown="startDrag(event,'welcome')">
+    <span>Welcome</span>
+    <div class="window-buttons">
+      <button onclick="minimizeWindow('welcome')">-</button>
+      <button onclick="maximizeWindow('welcome')">□</button>
+      <button onclick="closeWindow('welcome')">x</button>
+    </div>
+  </div>
+  <div class="welcome-content">
+
+    <!-- Profile Photo -->
+    <div class="welcome-photo">
+      <img src="https://via.placeholder.com/150" alt="Your Photo">
+    </div>
+
+    <h1>Hey, I'm <span>Brandon Chung</span></h1>
+    <p class="subtitle">
+      I live in Georgia and currently freelance as a software developer (full-stack). Since 2018, I've been on a programming journey. My main languages are Python, HTML, CSS, JavaScript, but I have experience in many others like C and Java.
+    </p>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/monitor.png" alt="Software Engineering" />
+        <h3>Software Development</h3>
+        <p>Creating modern and responsive websites, and creating user-friendly and intuitive programs.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://img.icons8.com/ios-filled/50/000000/smartphone.png" alt="Mobile App Design" />
+        <h3>UX/UI Design</h3>
+        <p>Designing beautiful websites with users in mind to create engaging digital experiences.</p>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll to see more</span>
+      <div class="mouse"></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Projects Window -->
+  <div class="window" id="projects">
+    <div class="title-bar" onmousedown="startDrag(event,'projects')">
+      <span>Projects</span>
+      <div class="window-buttons">
+        <button onclick="minimizeWindow('projects')">-</button>
+        <button onclick="maximizeWindow('projects')">□</button>
+        <button onclick="closeWindow('projects')">x</button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/code.png" alt="Portfolio">
+          <h3>Desktop Portfolio Website (2025)</h3>
+          <p>HTML | CSS | JavaScript</p>
+          <a href="https://github.com/yourusername/portfolio-website" target="_blank" class="project-link">View Project</a>
+        </div>
+
+        <div class="project-card">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/artificial-intelligence.png" alt="AI Project">
+          <h3>PDF Q&A Retrieval-Augmented Generator (2025)</h3>
+          <p>Ollama | LangChain | Python</p>
+          <a href="https://github.com/yourusername/react-game-engine" target="_blank" class="project-link">View Project</a>
+        </div>
+
+        <div class="project-card">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/restaurant.png" alt="Food App">
+          <h3>Food Delivery Android App (2024)</h3>
+          <p>Flutter | Dart</p>
+          <a href="https://github.com/yourusername/3d-js-art-gallery" target="_blank" class="project-link">View Project</a>
+        </div>
+
+        <div class="project-card">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/brain.png" alt="Machine Learning">
+          <h3>ML Learning Classification & Estimation (2024)</h3>
+          <p>Python | PyTorch</p>
+          <a href="https://github.com/yourusername/3d-js-art-gallery" target="_blank" class="project-link">View Project</a>
+        </div>
+
+        <div class="project-card">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/hospital-room.png" alt="Healthcare Website">
+          <h3>Viralidate - Healthcare Website (2024)</h3>
+          <p>React.js | HTML | CSS</p>
+          <a href="https://github.com/yourusername/3d-js-art-gallery" target="_blank" class="project-link">View Project</a>
+        </div>
+
+        <div class="project-card">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" alt="Process Manager">
+          <h3>Process Manager Program (2024)</h3>
+          <p>C | Python</p>
+          <a href="https://github.com/yourusername/3d-js-art-gallery" target="_blank" class="project-link">View Project</a>
+        </div>
+
+        <div class="project-card">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/calculator.png" alt="Calculator">
+          <h3>TI-84 Calculator (2023)</h3>
+          <p>Python</p>
+          <a href="https://github.com/yourusername/3d-js-art-gallery" target="_blank" class="project-link">View Project</a>
+        </div>
+
+        <div class="project-card">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Lyric Retriever">
+          <h3>Lyric Retriever (2023)</h3>
+          <p>Python</p>
+          <a href="https://github.com/yourusername/3d-js-art-gallery" target="_blank" class="project-link">View Project</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Resume Window -->
+  <div class="window" id="resume">
+    <div class="title-bar" onmousedown="startDrag(event,'resume')">
+      <span>Resume</span>
+      <div class="window-buttons">
+        <button onclick="minimizeWindow('resume')">-</button>
+        <button onclick="maximizeWindow('resume')">□</button>
+        <button onclick="closeWindow('resume')">x</button>
+      </div>
+    </div>
+    <div class="window-content">
+      <p>
+        <a href="assets/Chung_Brandon_Resume.pdf" download="Chung_Brandon_Resume.pdf">
+          <button class="download-btn">
+            <img src="https://img.icons8.com/ios-glyphs/16/ffffff/download--v1.png" />
+            Download My Resume (PDF)
+          </button>
+        </a>
+      </p>
+
+
+    </div>
+  </div>
+
+  <!-- Contact Window -->
+  <div class="window" id="contact">
+    <div class="title-bar" onmousedown="startDrag(event,'contact')">
+      <span>Contact</span>
+      <div class="window-buttons">
+        <button onclick="minimizeWindow('contact')">-</button>
+        <button onclick="maximizeWindow('contact')">□</button>
+        <button onclick="closeWindow('contact')">x</button>
+      </div>
+    </div>
+    <div class="window-content">
+      <i class="fas fa-envelope contact-icon"></i>
+        Email: <span id="email-text">brandontochung@gmail.com</span>
+        <button onclick="copyEmail()" class="copy-btn">📋 Copy</button>
+      <p><i class="fab fa-linkedin contact-icon"></i>
+      LinkedIn: <a href="#" class="link">https://www.linkedin.com/in/brandon-c-b730a3252/</a></p>
+      <p><i class="fab fa-github contact-icon"></i>
+      GitHub: <a href="#" class="link">https://github.com/bchung9</a></p>
+    </div>
+  </div>
+
+  <!-- Paint Window -->
+  <div class="window" id="paint">
+    <div class="title-bar" onmousedown="startDrag(event,'paint')">
+      <span>Paint</span>
+      <div class="window-buttons">
+        <button onclick="minimizeWindow('paint')">-</button>
+        <button onclick="maximizeWindow('paint')">□</button>
+        <button onclick="closeWindow('paint')">x</button>
+      </div>
+    </div>
+    <div class="window-content" style="padding: 0;">
+      <canvas id="paint-canvas" width="400" height="300" style="background: white; cursor: crosshair;"></canvas>
+      <div style="padding: 5px; background: #444; color: white; display: flex; gap: 10px; align-items: center;">
+        <label>Color: <input type="color" id="paint-color" value="#000000"></label>
+        <label>Size: <input type="number" id="paint-size" value="3" min="1" max="20" style="width: 50px;"></label>
+        <button onclick="clearCanvas()" style="background: #d32f2f; color: white; border: none; padding: 4px 10px; border-radius: 4px;">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calculator Window -->
+  <div class="window" id="calculator" style="top: 60px; left: 100px; width: 260px; display: none;">
+    <div class="title-bar" onmousedown="startDrag(event, 'calculator')">
+      <span>Calculator</span>
+      <div class="window-buttons">
+        <button onclick="minimizeWindow('calculator')">-</button>
+        <button onclick="maximizeWindow('calculator')">□</button>
+        <button onclick="closeWindow('calculator')">x</button>
+      </div>
+    </div>
+    <div class="window-content">
+      <input type="text" id="calc-display" readonly>
+      <div class="calc-buttons"></div>
+    </div>
+  </div>
+
+  <!-- Now Playing Widget -->
+  <div id="now-playing">
+    <span id="track-name">Now Playing: Chill Vibes</span>
+    <div class="controls">
+      <button onclick="toggleMusic()">▶️</button>
+      <input type="range" id="volume" min="0" max="1" step="0.01" onchange="setVolume(this.value)">
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bg-music" src="music/track.mp3" loop preload="auto"></audio>
+  <audio id="snd-open" src="sounds/mouse-click.mp3"></audio>
+  <audio id="snd-close" src="sounds/mouse-click.mp3"></audio>
+  <audio id="shutdown-sound" src="sounds/shutdown.mp3"></audio>
+
+  <div id="blackout"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
