@@ -103,6 +103,7 @@ body::before {
   transform: translateY(20px);
   transition: all 0.5s ease;
 }
+
 .show-icons .icon {
   opacity: 1;
   transform: translateY(0);
@@ -128,7 +129,7 @@ body::before {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60px; /* was 40px */
+  height: 62px;
   background-color: #000;
   display: flex;
   justify-content: space-between;
@@ -194,10 +195,11 @@ body::before {
   color: #ddd;
   resize: both;
   overflow: auto;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--window-bg, rgba(255, 255, 255, 0.15));
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 .title-bar {
   background-color: #0078d7;
   color: white;
@@ -227,7 +229,7 @@ a.link:hover {
 
 #now-playing {
   position: absolute;
-  bottom: 80px; /* was 60px; now sits above 60px taskbar + margin */
+  bottom: 80px;
   right: 20px;
   background: #2a2a2a;
   color: #fff;
@@ -247,7 +249,7 @@ a.link:hover {
   gap: 10px;
 }
 #now-playing button {
-  background: red;
+  background: #0078d7;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -352,83 +354,29 @@ a.link:hover {
   background-color: #005aab;
 }
 
-#paint {
-  width: 420px;
-  height: auto;
-}
-
-#paint .window-content {
-  height: 100%;
-  padding: 0;
-}
-
-#paint-canvas {
-  flex: 1;
-  width: 100%;
-  height: auto;
-}
-
-#calculator .window-content {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-#calc-display {
-  height: 40px;
-  font-size: 20px;
-  margin-bottom: 10px;
-  text-align: right;
-  padding: 5px;
-}
-
-.calc-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-}
-
-.calc-buttons button {
-  padding: 15px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.calc-buttons button:hover {
-  opacity: 0.85;
-}
-
-.calc-buttons .wide {
-  grid-column: span 2;
-}
-
-/* Welcome Content Styling */
 .welcome-content {
   max-width: 700px;
   margin: auto;
   text-align: center;
-  color: #f0f0f0; /* lighter text for better contrast */
+  color: #f0f0f0;
 }
 
 .welcome-content h1 {
   font-size: 2rem;
   font-weight: 700;
-  color: #ffffff; /* white title */
+  color: #ffffff;
 }
 
 .welcome-content h1 span {
-  color: #4ea1ff; /* keep blue highlight */
+  color: #4ea1ff;
 }
 
 .subtitle {
   font-size: 1.1rem;
   margin: 10px 0 30px;
-  color: #dddddd; /* light gray subtitle */
+  color: #dddddd;
 }
 
-/* Cards */
 .card-container {
   display: flex;
   justify-content: center;
@@ -437,8 +385,8 @@ a.link:hover {
 }
 
 .card {
-  background: #3a3a3a; /* dark card background to match theme */
-  color: #f0f0f0;      /* light card text */
+  background: #3a3a3a;
+  color: #f0f0f0;     
   border-radius: 12px;
   padding: 20px;
   width: 200px;
@@ -446,7 +394,7 @@ a.link:hover {
 }
 
 .card img {
-  filter: invert(1); /* make icons visible on dark background */
+  filter: invert(1);
 }
 
 .card:hover {
@@ -454,7 +402,6 @@ a.link:hover {
   box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
-/* Scroll Indicator */
 .scroll-indicator {
   margin-top: 40px;
   color: #555;
@@ -563,7 +510,6 @@ a.link:hover {
   overflow-y: scroll; /* always show vertical scrollbar */
 }
 
-
 #projects .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -612,4 +558,78 @@ a.link:hover {
   font-family: monospace;
   font-size: 16px;
   color: #ddd;
+}
+
+/* Dino Game Styles */
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(#f7f7f7, #eaeaea);
+  border-bottom: 3px solid #888;
+  overflow: hidden;
+}
+
+#dino {
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  width: 44px; /* Keep sprite proportions */
+  height: 47px;
+  background: none; /* Remove any background color */
+  border: none;     /* Remove border box */
+  box-shadow: none; /* Remove shadow */
+}
+
+#cactus {
+  position: absolute;
+  bottom: -3px;     /* Lower by 3 pixels */
+  width: auto;
+  height: 50px;
+  right: -50px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  image-rendering: pixelated;
+}
+
+.jump {
+  animation: jump 0.6s ease;
+}
+
+@keyframes jump {
+  0% { bottom: 0; }
+  50% { bottom: 110px; }
+  100% { bottom: 0; }
+}
+
+#game-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: #888;
+}
+
+#game-container .dino-score {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: #444;
+  font: 700 14px/1 monospace;
+  user-select: none;
+}
+
+#game-container .dino-over {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  text-align: center;
+  font: 700 16px/1.4 system-ui, sans-serif;
+  user-select: none;
 }

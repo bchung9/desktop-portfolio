@@ -39,13 +39,9 @@
       <img src="https://img.icons8.com/fluency-systems-regular/48/send-mass-email.png" />
       <span>Contact</span>
     </div>
-    <div class="icon" ondblclick="openWindow('paint')">
-      <img src="https://img.icons8.com/fluency-systems-regular/48/paint-palette.png" />
-      <span>Paint</span>
-    </div>
-    <div class="icon" ondblclick="openWindow('calculator')">
-      <img src="https://img.icons8.com/?size=100&id=ujRmpOIupIsv&format=png&color=000000" />
-      <span>Calculator</span>
+    <div class="icon" ondblclick="openWindow('dino-game')">
+      <img src="https://img.icons8.com/?size=100&id=DYmiclhsSQLE&format=png&color=000000" />
+      <span>Dino Game</span>
     </div>
   </div>
 
@@ -58,48 +54,47 @@
     <div class="time-display" id="clock"></div>
   </div>
 
-<!-- Welcome Window -->
-<div class="window" id="welcome">
-  <div class="title-bar" onmousedown="startDrag(event,'welcome')">
+  <!-- Welcome Window -->
+  <div class="window" id="welcome">
+    <div class="title-bar" onmousedown="startDrag(event,'welcome')">
     <span>Welcome</span>
-    <div class="window-buttons">
-      <button onclick="minimizeWindow('welcome')">-</button>
-      <button onclick="maximizeWindow('welcome')">□</button>
-      <button onclick="closeWindow('welcome')">x</button>
+      <div class="window-buttons">
+        <button onclick="minimizeWindow('welcome')">-</button>
+        <button onclick="maximizeWindow('welcome')">□</button>
+        <button onclick="closeWindow('welcome')">x</button>
+      </div>
     </div>
-  </div>
   <div class="welcome-content">
 
     <!-- Profile Photo -->
     <div class="welcome-photo">
       <img src="https://via.placeholder.com/150" alt="Your Photo">
     </div>
+      <h1>Hey, I'm <span>Brandon Chung</span></h1>
+      <p class="subtitle">
+        I live in Georgia and currently freelance as a software developer (full-stack). Since 2018, I've been on a programming journey. My main languages are Python, HTML, CSS, JavaScript, but I have experience in many others like C and Java.
+      </p>
 
-    <h1>Hey, I'm <span>Brandon Chung</span></h1>
-    <p class="subtitle">
-      I live in Georgia and currently freelance as a software developer (full-stack). Since 2018, I've been on a programming journey. My main languages are Python, HTML, CSS, JavaScript, but I have experience in many others like C and Java.
-    </p>
+      <div class="card-container">
+        <div class="card">
+          <img src="https://img.icons8.com/ios-filled/50/000000/monitor.png" alt="Software Engineering" />
+          <h3>Software Development</h3>
+          <p>Creating modern and responsive websites, and creating user-friendly and intuitive programs.</p>
+        </div>
 
-    <div class="card-container">
-      <div class="card">
-        <img src="https://img.icons8.com/ios-filled/50/000000/monitor.png" alt="Software Engineering" />
-        <h3>Software Development</h3>
-        <p>Creating modern and responsive websites, and creating user-friendly and intuitive programs.</p>
+        <div class="card">
+          <img src="https://img.icons8.com/ios-filled/50/000000/smartphone.png" alt="Mobile App Design" />
+          <h3>UX/UI Design</h3>
+          <p>Designing beautiful websites with users in mind to create engaging digital experiences.</p>
+        </div>
       </div>
 
-      <div class="card">
-        <img src="https://img.icons8.com/ios-filled/50/000000/smartphone.png" alt="Mobile App Design" />
-        <h3>UX/UI Design</h3>
-        <p>Designing beautiful websites with users in mind to create engaging digital experiences.</p>
+      <div class="scroll-indicator">
+        <span>Scroll to see more</span>
+        <div class="mouse"></div>
       </div>
-    </div>
-
-    <div class="scroll-indicator">
-      <span>Scroll to see more</span>
-      <div class="mouse"></div>
     </div>
   </div>
-</div>
 
 
   <!-- Projects Window -->
@@ -193,8 +188,6 @@
           </button>
         </a>
       </p>
-
-
     </div>
   </div>
 
@@ -234,19 +227,26 @@
     </div>
   </div>
 
-  <!-- Calculator Window -->
-  <div class="window" id="calculator" style="top: 60px; left: 100px; width: 260px; display: none;">
-    <div class="title-bar" onmousedown="startDrag(event, 'calculator')">
-      <span>Calculator</span>
+  <!-- Dino Game Window -->
+  <div class="window" id="dino-game">
+    <div class="title-bar" onmousedown="startDrag(event,'dino-game')">
+      <span>Dino Game</span>
       <div class="window-buttons">
-        <button onclick="minimizeWindow('calculator')">-</button>
-        <button onclick="maximizeWindow('calculator')">□</button>
-        <button onclick="closeWindow('calculator')">x</button>
+        <button onclick="minimizeWindow('dino-game')">-</button>
+        <button onclick="maximizeWindow('dino-game')">□</button>
+        <button onclick="closeWindow('dino-game')">x</button>
       </div>
     </div>
     <div class="window-content">
-      <input type="text" id="calc-display" readonly>
-      <div class="calc-buttons"></div>
+      <div id="game-container">
+        <div id="clouds" src="sprites/cloud.png" alt="cloud"></div>
+        <img id="dino" src="sprites/dino.png" alt="dino" />
+        <img id="cactus" src="sprites/cactus.png" alt="cactus" />
+        <div class="dino-score">0</div>
+      </div>
+      <p style="text-align:center; margin-top:10px;">
+        Press <strong>Space</strong> to jump!
+      </p>
     </div>
   </div>
 

@@ -212,104 +212,189 @@ function copyEmail() {
   });
 }
 
-// --- Paint App ---
+// --- Paint App (guarded) ---
 const canvas = document.getElementById('paint-canvas');
-const ctx = canvas.getContext('2d');
+let ctx = null;
 let painting = false;
 
-function startPosition(e) {
-  painting = true;
-  draw(e);
+if (canvas) {
+  ctx = canvas.getContext('2d');
+
+  function startPosition(e) {
+    painting = true;
+    draw(e);
+  }
+  function endPosition() {
+    painting = false;
+    ctx.beginPath();
+  }
+  function draw(e) {
+    if (!painting) return;
+
+    const colorInput = document.getElementById('paint-color');
+    const sizeInput = document.getElementById('paint-size');
+    const color = colorInput ? colorInput.value : '#000';
+    const size = sizeInput ? sizeInput.value : 5;
+
+    ctx.lineWidth = size;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = color;
+
+    const rect = canvas.getBoundingClientRect();
+    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+  }
+
+  canvas.addEventListener('mousedown', startPosition);
+  canvas.addEventListener('mouseup', endPosition);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseleave', endPosition);
+
+  window.clearCanvas = function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+} else {
+  // no-op so buttons referencing clearCanvas won't explode
+  window.clearCanvas = function () {};
 }
-function endPosition() {
-  painting = false;
-  ctx.beginPath();
-}
-function draw(e) {
-  if (!painting) return;
-  
-  const color = document.getElementById('paint-color').value;
-  const size = document.getElementById('paint-size').value;
-  
-  ctx.lineWidth = size;
-  ctx.lineCap = 'round';
-  ctx.strokeStyle = color;
 
-  const rect = canvas.getBoundingClientRect();
-  ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-}
-
-canvas.addEventListener('mousedown', startPosition);
-canvas.addEventListener('mouseup', endPosition);
-canvas.addEventListener('mousemove', draw);
-
-canvas.addEventListener('mouseleave', endPosition);
-
-// Clear canvas
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-// --- Basic Calculator ---
+// --- Basic Calculator (guarded) ---
 const calcDisplay = document.getElementById("calc-display");
 const calcButtonsContainer = document.querySelector(".calc-buttons");
 let calcExpression = "";
 
-const buttonLayout = [
-  ['CLEAR', 'DEL', '', ''],
-  ['7', '8', '9', '/'],
-  ['4', '5', '6', '*'],
-  ['1', '2', '3', '-'],
-  ['0', '.', '=', '+']
-];
+if (calcDisplay && calcButtonsContainer) {
+  const buttonLayout = [
+    ['CLEAR', 'DEL', '', ''],
+    ['7', '8', '9', '/'],
+    ['4', '5', '6', '*'],
+    ['1', '2', '3', '-'],
+    ['0', '.', '=', '+']
+  ];
 
-function updateCalcDisplay() {
-  calcDisplay.value = calcExpression;
+  function updateCalcDisplay() {
+    calcDisplay.value = calcExpression;
+  }
+
+  buttonLayout.forEach(row => {
+    row.forEach(btn => {
+      if (btn === '') {
+        const spacer = document.createElement("div");
+        calcButtonsContainer.appendChild(spacer);
+        return;
+      }
+      const b = document.createElement("button");
+      b.textContent = btn;
+
+      if (btn === 'CLEAR' || btn === 'DEL') {
+        b.style.background = "#777";
+        b.style.color = "white";
+      } else if (btn === '=') {
+        b.style.background = "orange";
+        b.style.color = "white";
+      } else {
+        b.style.background = "#2196F3";
+        b.style.color = "white";
+      }
+
+      b.onclick = () => {
+        if (btn === 'CLEAR') {
+          calcExpression = "";
+        } else if (btn === 'DEL') {
+          calcExpression = calcExpression.slice(0, -1);
+        } else if (btn === '=') {
+          try {
+            // NOTE: only evaluating user-typed digits/operators from our buttons
+            calcExpression = String(Function(`"use strict";return (${calcExpression})`)());
+          } catch {
+            calcExpression = "Error";
+          }
+        } else {
+          calcExpression += btn;
+        }
+        updateCalcDisplay();
+      };
+
+      calcButtonsContainer.appendChild(b);
+    });
+  });
 }
 
-buttonLayout.forEach(row => {
-  row.forEach(btn => {
-    if (btn === '') {
-      const spacer = document.createElement("div");
-      calcButtonsContainer.appendChild(spacer);
-      return;
-    }
-    const b = document.createElement("button");
-    b.textContent = btn;
+// Dino Game
+let isJumping = false;
+let score = 0;
+let gameOver = false;
+let cactusSpeed = 3;
 
-    // Styling logic
-    if (btn === 'CLEAR' || btn === 'DEL') {
-      b.style.background = "#777"; // gray top row
-      b.style.color = "white";
-    } else if (btn === '=') {
-      b.style.background = "orange";
-      b.style.color = "white";
-    } else {
-      b.style.background = "#2196F3"; // blue
-      b.style.color = "white";
-    }
+const dinoEl = document.getElementById("dino");
+const cactusEl = document.getElementById("cactus");
+const scoreEl = document.querySelector(".dino-score");
+const gameContainer = document.getElementById("game-container");
 
-    b.onclick = () => {
-      if (btn === 'CLEAR') {
-        calcExpression = "";
-      } else if (btn === 'DEL') {
-        calcExpression = calcExpression.slice(0, -1);
-      } else if (btn === '=') {
-        try {
-          calcExpression = eval(calcExpression).toString();
-        } catch {
-          calcExpression = "Error";
-        }
-      } else {
-        calcExpression += btn;
-      }
-      updateCalcDisplay();
-    };
+function jump() {
+  if (!isJumping && !gameOver) {
+    isJumping = true;
+    dinoEl.classList.add("jump");
+    setTimeout(() => {
+      dinoEl.classList.remove("jump");
+      isJumping = false;
+    }, 500);
+  }
+}
 
-    calcButtonsContainer.appendChild(b);
-  });
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") {
+    if (gameOver) restartGame();
+    else jump();
+  }
 });
 
+function moveCactus() {
+  if (gameOver) return;
+
+  let cactusPos = parseInt(window.getComputedStyle(cactusEl).right);
+  cactusEl.style.right = (cactusPos + cactusSpeed) + "px";
+
+  if (cactusPos > gameContainer.offsetWidth) {
+    cactusEl.style.right = "-40px";
+    score++;
+    scoreEl.textContent = score;
+    cactusSpeed += 0.05; // gradually increase speed
+  }
+
+  const dinoRect = dinoEl.getBoundingClientRect();
+  const cactusRect = cactusEl.getBoundingClientRect();
+
+  if (
+    dinoRect.right > cactusRect.left &&
+    dinoRect.left < cactusRect.right &&
+    dinoRect.bottom > cactusRect.top
+  ) {
+    endGame();
+  }
+
+  requestAnimationFrame(moveCactus);
+}
+
+function endGame() {
+  gameOver = true;
+  const overlay = document.createElement("div");
+  overlay.className = "dino-over";
+  overlay.innerHTML = `Game Over!<br>Score: ${score}<br><small>Press Space to Restart</small>`;
+  gameContainer.appendChild(overlay);
+}
+
+function restartGame() {
+  gameOver = false;
+  score = 0;
+  scoreEl.textContent = score;
+  cactusSpeed = 3;
+  cactusEl.style.right = "-40px";
+  const overlay = document.querySelector(".dino-over");
+  if (overlay) overlay.remove();
+  requestAnimationFrame(moveCactus);
+}
+
+requestAnimationFrame(moveCactus);
