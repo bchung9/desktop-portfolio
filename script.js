@@ -328,6 +328,14 @@ let score = 0;
 let gameOver = false;
 let cactusSpeed = 3;
 
+const jumpSound = new Audio("sounds/jump.mp3");
+const pointSound = new Audio("sounds/point.mp3");
+const gameOverSound = new Audio("sounds/gameover.mp3");
+
+jumpSound.volume = 0.4;
+pointSound.volume = 0.3;
+gameOverSound.volume = 0.5;
+
 const dinoEl = document.getElementById("dino");
 const cactusEl = document.getElementById("cactus");
 const scoreEl = document.querySelector(".dino-score");
@@ -336,6 +344,8 @@ const gameContainer = document.getElementById("game-container");
 function jump() {
   if (!isJumping && !gameOver) {
     isJumping = true;
+    jumpSound.currentTime = 0;
+    jumpSound.play();
     dinoEl.classList.add("jump");
     setTimeout(() => {
       dinoEl.classList.remove("jump");
@@ -358,11 +368,13 @@ function moveCactus() {
   cactusEl.style.right = (cactusPos + cactusSpeed) + "px";
 
   if (cactusPos > gameContainer.offsetWidth) {
-    cactusEl.style.right = "-40px";
-    score++;
-    scoreEl.textContent = score;
-    cactusSpeed += 0.05; // gradually increase speed
-  }
+  cactusEl.style.right = "-40px";
+  score++;
+  scoreEl.textContent = score;
+  pointSound.currentTime = 0;
+  pointSound.play();
+  cactusSpeed += 0.02;
+}
 
   const dinoRect = dinoEl.getBoundingClientRect();
   const cactusRect = cactusEl.getBoundingClientRect();
@@ -380,6 +392,8 @@ function moveCactus() {
 
 function endGame() {
   gameOver = true;
+  gameOverSound.currentTime = 0;
+  gameOverSound.play();
   const overlay = document.createElement("div");
   overlay.className = "dino-over";
   overlay.innerHTML = `Game Over!<br>Score: ${score}<br><small>Press Space to Restart</small>`;
