@@ -18,6 +18,10 @@ function openWindow(id) {
 
   w.style.display = 'block';
   w.style.zIndex = ++highestZ;
+
+  if (id === "dino-game") {
+    initDinoGame();
+  }
 }
 
 
@@ -28,6 +32,10 @@ function closeWindow(id) {
   const taskbarBtn = document.getElementById(`tb-${id}`);
   if (taskbarBtn) {
     taskbarBtn.remove();
+  }
+
+  if (id === "dino-game") {
+    gameOver = true;
   }
 }
 
@@ -94,7 +102,7 @@ function toggleMusic() {
 function setVolume(val) {
   music.volume = val;
 }
-music.volume = 0.5;
+music.volume = 0.25;
 
 function startExperience() {
   document.getElementById('splash').style.opacity = '0';
@@ -164,20 +172,18 @@ function minimizeWindow(id) {
   }
 }
 
-
 function restoreWindow(id) {
   const w = document.getElementById(id);
   w.style.display = 'block';
   w.style.zIndex = ++highestZ;
 }
 
-let windowState = {}; // store original sizes/positions
+let windowState = {};
 
 function maximizeWindow(id) {
   const w = document.getElementById(id);
 
   if (w.classList.contains('maximized')) {
-    // Unmaximize: restore original position & size
     w.classList.remove('maximized');
     if (windowState[id]) {
       w.style.top = windowState[id].top;
@@ -186,7 +192,6 @@ function maximizeWindow(id) {
       w.style.height = windowState[id].height;
     }
   } else {
-    // Save current size & position
     windowState[id] = {
       top: w.style.top,
       left: w.style.left,
@@ -194,12 +199,11 @@ function maximizeWindow(id) {
       height: w.style.height
     };
 
-    // Maximize to fill screen
     w.classList.add('maximized');
     w.style.top = '0';
     w.style.left = '0';
     w.style.width = '100vw';
-    w.style.height = 'calc(100vh - 65px)'; // leaves room for taskbar
+    w.style.height = 'calc(100vh - 65px)';
   }
 }
 
@@ -212,128 +216,18 @@ function copyEmail() {
   });
 }
 
-// --- Paint App (guarded) ---
-const canvas = document.getElementById('paint-canvas');
-let ctx = null;
-let painting = false;
-
-if (canvas) {
-  ctx = canvas.getContext('2d');
-
-  function startPosition(e) {
-    painting = true;
-    draw(e);
-  }
-  function endPosition() {
-    painting = false;
-    ctx.beginPath();
-  }
-  function draw(e) {
-    if (!painting) return;
-
-    const colorInput = document.getElementById('paint-color');
-    const sizeInput = document.getElementById('paint-size');
-    const color = colorInput ? colorInput.value : '#000';
-    const size = sizeInput ? sizeInput.value : 5;
-
-    ctx.lineWidth = size;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = color;
-
-    const rect = canvas.getBoundingClientRect();
-    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-  }
-
-  canvas.addEventListener('mousedown', startPosition);
-  canvas.addEventListener('mouseup', endPosition);
-  canvas.addEventListener('mousemove', draw);
-  canvas.addEventListener('mouseleave', endPosition);
-
-  window.clearCanvas = function () {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  };
-} else {
-  // no-op so buttons referencing clearCanvas won't explode
-  window.clearCanvas = function () {};
-}
-
-// --- Basic Calculator (guarded) ---
-const calcDisplay = document.getElementById("calc-display");
-const calcButtonsContainer = document.querySelector(".calc-buttons");
-let calcExpression = "";
-
-if (calcDisplay && calcButtonsContainer) {
-  const buttonLayout = [
-    ['CLEAR', 'DEL', '', ''],
-    ['7', '8', '9', '/'],
-    ['4', '5', '6', '*'],
-    ['1', '2', '3', '-'],
-    ['0', '.', '=', '+']
-  ];
-
-  function updateCalcDisplay() {
-    calcDisplay.value = calcExpression;
-  }
-
-  buttonLayout.forEach(row => {
-    row.forEach(btn => {
-      if (btn === '') {
-        const spacer = document.createElement("div");
-        calcButtonsContainer.appendChild(spacer);
-        return;
-      }
-      const b = document.createElement("button");
-      b.textContent = btn;
-
-      if (btn === 'CLEAR' || btn === 'DEL') {
-        b.style.background = "#777";
-        b.style.color = "white";
-      } else if (btn === '=') {
-        b.style.background = "orange";
-        b.style.color = "white";
-      } else {
-        b.style.background = "#2196F3";
-        b.style.color = "white";
-      }
-
-      b.onclick = () => {
-        if (btn === 'CLEAR') {
-          calcExpression = "";
-        } else if (btn === 'DEL') {
-          calcExpression = calcExpression.slice(0, -1);
-        } else if (btn === '=') {
-          try {
-            // NOTE: only evaluating user-typed digits/operators from our buttons
-            calcExpression = String(Function(`"use strict";return (${calcExpression})`)());
-          } catch {
-            calcExpression = "Error";
-          }
-        } else {
-          calcExpression += btn;
-        }
-        updateCalcDisplay();
-      };
-
-      calcButtonsContainer.appendChild(b);
-    });
-  });
-}
-
 // Dino Game
 let isJumping = false;
 let score = 0;
 let gameOver = false;
-let cactusSpeed = 3;
+let cactusSpeed = 2;
 
 const jumpSound = new Audio("sounds/jump.mp3");
 const pointSound = new Audio("sounds/point.mp3");
 const gameOverSound = new Audio("sounds/gameover.mp3");
 
-jumpSound.volume = 0.4;
-pointSound.volume = 0.3;
+jumpSound.volume = 0.5;
+pointSound.volume = 0.4;
 gameOverSound.volume = 0.5;
 
 const dinoEl = document.getElementById("dino");
@@ -356,7 +250,7 @@ function jump() {
 
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
-    if (gameOver) restartGame();
+    if (gameOver) initDinoGame();
     else jump();
   }
 });
@@ -373,7 +267,7 @@ function moveCactus() {
   scoreEl.textContent = score;
   pointSound.currentTime = 0;
   pointSound.play();
-  cactusSpeed += 0.02;
+  cactusSpeed += 0.1;
 }
 
   const dinoRect = dinoEl.getBoundingClientRect();
@@ -400,15 +294,15 @@ function endGame() {
   gameContainer.appendChild(overlay);
 }
 
-function restartGame() {
+function initDinoGame() {
   gameOver = false;
   score = 0;
   scoreEl.textContent = score;
-  cactusSpeed = 3;
+  cactusSpeed = 2;
   cactusEl.style.right = "-40px";
+
   const overlay = document.querySelector(".dino-over");
   if (overlay) overlay.remove();
+
   requestAnimationFrame(moveCactus);
 }
-
-requestAnimationFrame(moveCactus);
