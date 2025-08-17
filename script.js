@@ -248,10 +248,17 @@ function jump() {
   }
 }
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", function(e) {
   if (e.code === "Space") {
-    if (gameOver) initDinoGame();
-    else jump();
+    const dinoWin = document.getElementById("dino-game");
+
+    if (dinoWin && dinoWin.style.display === "block") {
+      if (gameOver) {
+        initDinoGame();
+      } else {
+        jump();
+      }
+    }
   }
 });
 
