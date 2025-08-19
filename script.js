@@ -76,7 +76,7 @@ function updateClock() {
 
   const tzString = now.toLocaleTimeString('en-US', { timeZoneName: 'short' });
   const tzParts = tzString.split(' ');
-  const tzAbbr = tzParts[tzParts.length - 1]; // e.g. "PDT" or "EST"
+  const tzAbbr = tzParts[tzParts.length - 1];
 
   const clockEl = document.getElementById('clock');
   if (clockEl) {
@@ -102,7 +102,7 @@ function toggleMusic() {
 function setVolume(val) {
   music.volume = val;
 }
-music.volume = 0.25;
+music.volume = 0.5;
 
 function startExperience() {
   document.getElementById('splash').style.opacity = '0';
@@ -159,9 +159,8 @@ function minimizeWindow(id) {
     const btn = document.createElement('button');
     btn.id = `tb-${id}`;
     btn.classList.add('taskbar-icon');
-    btn.title = id.charAt(0).toUpperCase() + id.slice(1); // tooltip text
+    btn.title = id.charAt(0).toUpperCase() + id.slice(1);
 
-    // Match icon with corresponding window
     const desktopIcon = document.querySelector(`.icon[ondblclick*="${id}"] img`);
     const iconImg = document.createElement('img');
     iconImg.src = desktopIcon ? desktopIcon.src : '';

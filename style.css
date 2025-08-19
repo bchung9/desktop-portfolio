@@ -83,6 +83,7 @@ body::before {
   cursor: pointer;
   margin-top: 15px;
 }
+
 #enter-btn:disabled {
   background-color: #555;
   cursor: not-allowed;
@@ -209,9 +210,11 @@ body::before {
   cursor: move;
   user-select: none;
 }
+
 .window-content {
   padding: 10px;
 }
+
 .window button {
   background: transparent;
   border: none;
@@ -219,10 +222,12 @@ body::before {
   font-weight: bold;
   cursor: pointer;
 }
+
 a.link {
   color: #4ea1ff;
   text-decoration: none;
 }
+
 a.link:hover {
   text-decoration: underline;
 }
@@ -248,6 +253,7 @@ a.link:hover {
   align-items: center;
   gap: 10px;
 }
+
 #now-playing button {
   background: #0078d7;
   color: white;
@@ -256,6 +262,7 @@ a.link:hover {
   border-radius: 4px;
   cursor: pointer;
 }
+
 #now-playing input[type=range] {
   width: 100px;
 }
@@ -274,6 +281,7 @@ a.link:hover {
   cursor: pointer;
   border-radius: 3px;
 }
+
 .taskbar-icon:hover {
   background-color: #333;
 }
@@ -330,9 +338,11 @@ a.link:hover {
   border-radius: 6px;
   transition: background 0.2s;
 }
+
 .taskbar-icon:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
+
 .taskbar-icon img {
   width: 32px;
   height: 32px;
@@ -350,6 +360,7 @@ a.link:hover {
   cursor: pointer;
   transition: background 0.2s ease;
 }
+
 .copy-btn:hover {
   background-color: #005aab;
 }
@@ -447,7 +458,7 @@ a.link:hover {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #fff; /* makes it pop on dark backgrounds */
+  border: 3px solid #fff;
 }
 
 .projects-grid {
@@ -505,16 +516,16 @@ a.link:hover {
 
 #projects .window-content {
   padding: 10px;
-  height: calc(100% - 35px); /* space for title bar */
+  height: calc(100% - 35px);
   box-sizing: border-box;
-  overflow-y: scroll; /* always show vertical scrollbar */
+  overflow-y: scroll;
 }
 
 #welcome .welcome-content {
   padding: 10px;
-  height: calc(100% - 35px); /* space for title bar */
+  height: calc(100% - 35px);
   box-sizing: border-box;
-  overflow-y: auto; /* content scrolls, title bar stays fixed */
+  overflow-y: auto;
 }
 
 #projects .projects-grid {
@@ -523,7 +534,6 @@ a.link:hover {
   gap: 15px;
 }
 
-/* Contact Section Styling */
 .contact-container {
   display: flex;
   flex-direction: column;
@@ -560,14 +570,12 @@ a.link:hover {
   text-decoration: underline;
 }
 
-/* Make email text selectable but nicely aligned */
 #email-text {
   font-family: monospace;
   font-size: 16px;
   color: #ddd;
 }
 
-/* Dino Game Styles */
 #game-container {
   position: relative;
   width: 100%;
@@ -639,4 +647,34 @@ a.link:hover {
   text-align: center;
   font: 700 16px/1.4 system-ui, sans-serif;
   user-select: none;
+}
+
+.resume-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100% - 15px);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.resume-pdf {
+  width: 100%;           
+  height: 390px;       
+  border: 1px solid #ccc;
+  margin-bottom: 0px;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #0078d7;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.download-btn:hover {
+  background: #005a9e;
 }

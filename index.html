@@ -171,15 +171,16 @@
 
   <!-- Resume Window -->
   <div class="window" id="resume">
-    <div class="title-bar" onmousedown="startDrag(event,'resume')">
-      <span>Resume</span>
-      <div class="window-buttons">
-        <button onclick="minimizeWindow('resume')">-</button>
-        <button onclick="maximizeWindow('resume')">□</button>
-        <button onclick="closeWindow('resume')">x</button>
+      <div class="title-bar">
+        <span>Resume</span>
+        <div class="window-controls">
+          <button onclick="minimizeWindow('resume')">–</button>
+          <button onclick="maximizeWindow('resume')">□</button>
+          <button onclick="closeWindow('resume')">×</button>
+        </div>
       </div>
-    </div>
     <div class="window-content">
+      <iframe src="assets/Chung_Brandon_Resume.pdf" class="resume-pdf" frameborder="0"></iframe>
       <p>
         <a href="assets/Chung_Brandon_Resume.pdf" download="Chung_Brandon_Resume.pdf">
           <button class="download-btn">
