@@ -171,24 +171,26 @@
 
   <!-- Resume Window -->
   <div class="window" id="resume">
-      <div class="title-bar">
+      <div class="title-bar" onmousedown="startDrag(event,'resume')">
         <span>Resume</span>
-        <div class="window-controls">
-          <button onclick="minimizeWindow('resume')">–</button>
+        <div class="window-buttons">
+          <button onclick="minimizeWindow('resume')">-</button>
           <button onclick="maximizeWindow('resume')">□</button>
-          <button onclick="closeWindow('resume')">×</button>
+          <button onclick="closeWindow('resume')">x</button>
         </div>
       </div>
-    <div class="window-content">
-      <iframe src="assets/Chung_Brandon_Resume.pdf" class="resume-pdf" frameborder="0"></iframe>
-      <p>
-        <a href="assets/Chung_Brandon_Resume.pdf" download="Chung_Brandon_Resume.pdf">
-          <button class="download-btn">
-            <img src="https://img.icons8.com/ios-glyphs/16/ffffff/download--v1.png" />
-            Download My Resume (PDF)
-          </button>
-        </a>
-      </p>
+      <div class="window-content">
+        <div class="resume-frame-wrapper">
+          <iframe src="assets/Chung_Brandon_Resume.pdf" class="resume-pdf" frameborder="0"></iframe>
+          <p>
+            <a href="assets/Chung_Brandon_Resume.pdf" download="Chung_Brandon_Resume.pdf">
+              <button class="download-btn">
+                <img src="https://img.icons8.com/ios-glyphs/16/ffffff/download--v1.png" />
+                Download My Resume (PDF)
+              </button>
+            </a>
+          </p>
+        </div>
     </div>
   </div>
 
