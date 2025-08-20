@@ -2,7 +2,7 @@
 
 An interactive **desktop-inspired portfolio** built with **HTML, CSS, and JavaScript**, featuring draggable windows, a retro Dino Game, a music player, and a built-in PDF resume viewer.  
 
-This project recreates the feel of a mini operating system directly in the browser 🚀  
+This project recreates the feel of a mini operating system directly in the browser.
 
 ---
 
