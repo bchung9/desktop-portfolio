@@ -88,6 +88,13 @@ updateClock();
 
 const music = document.getElementById('bg-music');
 const playBtn = document.querySelector('#now-playing button');
+const volumeSlider = document.getElementById('volume');
+
+music.volume = 0.05;
+
+if (volumeSlider) {
+  volumeSlider.value = music.volume;
+}
 
 function toggleMusic() {
   playClickSound();
@@ -102,7 +109,6 @@ function toggleMusic() {
 function setVolume(val) {
   music.volume = val;
 }
-music.volume = 0.5;
 
 function startExperience() {
   document.getElementById('splash').style.opacity = '0';
@@ -266,6 +272,32 @@ document.addEventListener("keydown", function(e) {
   }
 });
 
+gameContainer.addEventListener("click", function() {
+  const dinoWin = document.getElementById("dino-game");
+
+  if (dinoWin && dinoWin.style.display === "block") {
+    if (gameOver) {
+      initDinoGame();
+    } else {
+      jump();
+    }
+  }
+});
+
+gameContainer.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  const dinoWin = document.getElementById("dino-game");
+
+  if (dinoWin && dinoWin.style.display === "block") {
+    if (gameOver) {
+      initDinoGame();
+    } else {
+      jump();
+    }
+  }
+}, { passive: false });
+
+
 function moveCactus() {
   if (gameOver) return;
 
@@ -301,7 +333,7 @@ function endGame() {
   gameOverSound.play();
   const overlay = document.createElement("div");
   overlay.className = "dino-over";
-  overlay.innerHTML = `Game Over!<br>Score: ${score}<br><small>Press Space to Restart</small>`;
+  overlay.innerHTML = `Game Over!<br>Score: ${score}<br><small>Press Space (or Tap the Screen) to Restart</small>`;
   gameContainer.appendChild(overlay);
 }
 
