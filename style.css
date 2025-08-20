@@ -146,7 +146,7 @@ body::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #d32f2f;
+  background: #0078d7;
   border-radius: 6px;
   cursor: pointer;
   margin: 6px 0;
@@ -155,10 +155,6 @@ body::before {
   width: 28px;
   height: 28px;
   filter: invert(1);
-}
-
-.power-button:hover {
-  background-color: red;
 }
 
 #blackout {

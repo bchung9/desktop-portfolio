@@ -2,7 +2,7 @@ let dragInfo = {};
 let highestZ = 1;
 
 function openWindow(id) {
-  document.getElementById('snd-open').play();
+  playClickSound();
   const w = document.getElementById(id);
 
   // Universal size and centering for all windows
@@ -24,9 +24,8 @@ function openWindow(id) {
   }
 }
 
-
 function closeWindow(id) {
-  document.getElementById('snd-close').play();
+  playClickSound();
   document.getElementById(id).style.display = 'none';
 
   const taskbarBtn = document.getElementById(`tb-${id}`);
@@ -91,6 +90,7 @@ const music = document.getElementById('bg-music');
 const playBtn = document.querySelector('#now-playing button');
 
 function toggleMusic() {
+  playClickSound();
   if (music.paused) {
     music.play();
     playBtn.textContent = '⏸';
@@ -151,6 +151,7 @@ function shutdownSystem() {
 }
 
 function minimizeWindow(id) {
+  playClickSound();
   const w = document.getElementById(id);
   w.style.display = 'none';
 
@@ -166,7 +167,10 @@ function minimizeWindow(id) {
     iconImg.src = desktopIcon ? desktopIcon.src : '';
     btn.appendChild(iconImg);
 
-    btn.onclick = () => restoreWindow(id);
+    btn.onclick = () => {
+      playClickSound();
+      restoreWindow(id);
+    };
     taskbar.appendChild(btn);
   }
 }
@@ -180,6 +184,7 @@ function restoreWindow(id) {
 let windowState = {};
 
 function maximizeWindow(id) {
+  playClickSound();
   const w = document.getElementById(id);
 
   if (w.classList.contains('maximized')) {
@@ -311,4 +316,12 @@ function initDinoGame() {
   if (overlay) overlay.remove();
 
   requestAnimationFrame(moveCactus);
+}
+
+function playClickSound() {
+  const clickSound = document.getElementById('click');
+  if (clickSound) {
+    clickSound.currentTime = 0;
+    clickSound.play();
+  }
 }
