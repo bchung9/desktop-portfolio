@@ -609,9 +609,9 @@ a.link:hover {
 }
 
 @keyframes jump {
-  0% { bottom: 200px; }
+  0% { bottom: 0px; }
   50% { bottom: 200px; }
-  100% { bottom: 200px; }
+  100% { bottom: 0px; }
 }
 
 #game-container::after {
@@ -674,6 +674,7 @@ a.link:hover {
 .download-btn:hover {
   background: #005a9e;
 }
+
 
 
 
