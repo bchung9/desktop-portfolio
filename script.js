@@ -230,7 +230,7 @@ function copyEmail() {
 let isJumping = false;
 let score = 0;
 let gameOver = false;
-let cactusSpeed = 2;
+let cactusSpeed = 3;
 
 const jumpSound = new Audio("sounds/jump.mp3");
 const pointSound = new Audio("sounds/point.mp3");
@@ -341,7 +341,7 @@ function initDinoGame() {
   gameOver = false;
   score = 0;
   scoreEl.textContent = score;
-  cactusSpeed = 2;
+  cactusSpeed = 3;
   cactusEl.style.right = "-40px";
 
   const overlay = document.querySelector(".dino-over");
@@ -357,3 +357,4 @@ function playClickSound() {
     clickSound.play();
   }
 }
+
