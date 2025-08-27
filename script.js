@@ -63,21 +63,26 @@ function doDrag(e) {
   const info = dragInfo[dragInfo.current];
   if (!info) return;
 
-  // Proposed new position
   let newX = info.origX + (e.clientX - info.startX);
   let newY = info.origY + (e.clientY - info.startY);
 
-  // Get viewport boundaries
   const maxX = window.innerWidth - info.el.offsetWidth;
-  const maxY = window.innerHeight - info.el.offsetHeight;
 
-  // Clamp values to keep window inside screen
+  // Select the correct taskbar
+  const taskbar = document.querySelector("#taskbar");
+
+  let maxY = window.innerHeight - info.el.offsetHeight;
+  if (taskbar) {
+    const taskbarRect = taskbar.getBoundingClientRect();
+    // Prevent dragging below the top of the taskbar
+    maxY = taskbarRect.top - info.el.offsetHeight;
+  }
+
   newX = Math.max(0, Math.min(newX, maxX));
   newY = Math.max(0, Math.min(newY, maxY));
 
-  // Apply
-  info.el.style.left = newX + 'px';
-  info.el.style.top = newY + 'px';
+  info.el.style.left = newX + "px";
+  info.el.style.top = newY + "px";
 }
 
 function stopDrag() {
