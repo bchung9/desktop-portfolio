@@ -19,6 +19,13 @@ function openWindow(id) {
   w.style.display = 'block';
   w.style.zIndex = ++highestZ;
 
+  if (window.innerWidth < 768) {
+    w.style.width = "90vw";
+    w.style.height = "70vh";
+    w.style.left = "5vw";
+    w.style.top = "10vh";
+  }
+
   if (id === "dino-game") {
     initDinoGame();
   }
@@ -55,8 +62,22 @@ function startDrag(e, id) {
 function doDrag(e) {
   const info = dragInfo[dragInfo.current];
   if (!info) return;
-  info.el.style.left = info.origX + (e.clientX - info.startX) + 'px';
-  info.el.style.top = info.origY + (e.clientY - info.startY) + 'px';
+
+  // Proposed new position
+  let newX = info.origX + (e.clientX - info.startX);
+  let newY = info.origY + (e.clientY - info.startY);
+
+  // Get viewport boundaries
+  const maxX = window.innerWidth - info.el.offsetWidth;
+  const maxY = window.innerHeight - info.el.offsetHeight;
+
+  // Clamp values to keep window inside screen
+  newX = Math.max(0, Math.min(newX, maxX));
+  newY = Math.max(0, Math.min(newY, maxY));
+
+  // Apply
+  info.el.style.left = newX + 'px';
+  info.el.style.top = newY + 'px';
 }
 
 function stopDrag() {
@@ -230,7 +251,9 @@ function copyEmail() {
 let isJumping = false;
 let score = 0;
 let gameOver = false;
-let cactusSpeed = 3;
+let cactusSpeed = 2;
+let jumpDuration = 600; // in milliseconds
+let jumpHeight = 220; // in pixels
 
 const jumpSound = new Audio("sounds/jump.mp3");
 const pointSound = new Audio("sounds/point.mp3");
@@ -246,16 +269,27 @@ const scoreEl = document.querySelector(".dino-score");
 const gameContainer = document.getElementById("game-container");
 
 function jump() {
-  if (!isJumping && !gameOver) {
-    isJumping = true;
-    jumpSound.currentTime = 0;
-    jumpSound.play();
-    dinoEl.classList.add("jump");
-    setTimeout(() => {
-      dinoEl.classList.remove("jump");
+  if (isJumping) return;
+  isJumping = true;
+  jumpStart = performance.now();
+
+  function animateJump(time) {
+    let elapsed = time - jumpStart;
+
+    if (elapsed < jumpDuration) {
+      // Smooth jump arc using sine
+      let progress = elapsed / jumpDuration;
+      let height = Math.sin(progress * Math.PI) * jumpHeight;
+      dino.style.bottom = height + "px";
+      requestAnimationFrame(animateJump);
+    } else {
+      // End of jump
+      dino.style.bottom = "0px";
       isJumping = false;
-    }, 500);
+    }
   }
+
+  requestAnimationFrame(animateJump);
 }
 
 document.addEventListener("keydown", function(e) {
@@ -341,7 +375,7 @@ function initDinoGame() {
   gameOver = false;
   score = 0;
   scoreEl.textContent = score;
-  cactusSpeed = 3;
+  cactusSpeed = 2;
   cactusEl.style.right = "-40px";
 
   const overlay = document.querySelector(".dino-over");
@@ -357,4 +391,3 @@ function playClickSound() {
     clickSound.play();
   }
 }
-
