@@ -331,22 +331,33 @@ gameContainer.addEventListener("touchstart", function(e) {
   }
 }, { passive: false });
 
+let lastTime = null;
 
-function moveCactus() {
+function moveCactus(time) {
   if (gameOver) return;
 
-  let cactusPos = parseInt(window.getComputedStyle(cactusEl).right);
-  cactusEl.style.right = (cactusPos + cactusSpeed) + "px";
+  if (!lastTime) lastTime = time;
+  const deltaTime = (time - lastTime) / 1000; // seconds
+  lastTime = time;
 
+  // Current cactus position (in px)
+  let cactusPos = parseFloat(cactusEl.style.right) || 0;
+
+  // Move cactus based on real time
+  cactusPos += cactusSpeed * 100 * deltaTime; // 100 = base speed factor
+  cactusEl.style.right = cactusPos + "px";
+
+  // Respawn cactus
   if (cactusPos > gameContainer.offsetWidth) {
-  cactusEl.style.right = "-40px";
-  score++;
-  scoreEl.textContent = score;
-  pointSound.currentTime = 0;
-  pointSound.play();
-  cactusSpeed += 0.1;
-}
+    cactusEl.style.right = "-40px";
+    score++;
+    scoreEl.textContent = score;
+    pointSound.currentTime = 0;
+    pointSound.play();
+    cactusSpeed += 0.1;
+  }
 
+  // Collision detection
   const dinoRect = dinoEl.getBoundingClientRect();
   const cactusRect = cactusEl.getBoundingClientRect();
 
@@ -356,6 +367,7 @@ function moveCactus() {
     dinoRect.bottom > cactusRect.top
   ) {
     endGame();
+    return;
   }
 
   requestAnimationFrame(moveCactus);
