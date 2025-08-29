@@ -184,8 +184,9 @@ body::before {
   width: 300px;
   min-width: 200px;
   min-height: 150px;
-  border: 2px solid #000;
+  border: 1px solid #000;
   background-color: #2e2e2e;
+  border-radius: 6px;
   display: none;
   z-index: 10;
   box-shadow: 5px 5px #000;
@@ -474,20 +475,20 @@ a.link:hover {
 
 .project-card img {
   width: 50px;
-  filter: invert(1);
-  margin-bottom: 10px;
+  height: 50px;
+  margin: 0 auto 10px;
 }
 
 .project-card h3 {
   font-size: 1rem;
-  color: #fff;
-  margin: 10px 0 5px;
+  margin: 5px 0;
+  flex-grow: 1;
 }
 
 .project-card p {
-  font-size: 0.85rem;
-  color: #bbb;
-  margin-bottom: 15px;
+  font-size: 0.9rem;
+  margin: 5px 0;
+  color: #ccc;
 }
 
 .project-card:hover {
@@ -729,4 +730,63 @@ a.link:hover {
   background: #0078d7;
   color: #fff;
   border-color: #005aab;
+}
+
+.category-title {
+  margin: 20px 0 10px;
+  font-size: 1.2em;
+  color: #fff;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+}
+
+.resize-handle {
+  position: absolute;
+  background: transparent;
+}
+
+.resize-handle.top,
+.resize-handle.bottom {
+  left: 0;
+  right: 0;
+  height: 5px;
+  cursor: ns-resize;
+}
+
+.resize-handle.left,
+.resize-handle.right {
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: ew-resize;
+}
+
+.resize-handle.top { top: 0; }
+.resize-handle.bottom { bottom: 0; }
+.resize-handle.left { left: 0; }
+.resize-handle.right { right: 0; }
+
+.resize-handle.top-left,
+.resize-handle.top-right,
+.resize-handle.bottom-left,
+.resize-handle.bottom-right {
+  width: 10px;
+  height: 10px;
+}
+
+.resize-handle.top-left {
+  top: 0; left: 0;
+  cursor: nwse-resize;
+}
+.resize-handle.top-right {
+  top: 0; right: 0;
+  cursor: nesw-resize;
+}
+.resize-handle.bottom-left {
+  bottom: 0; left: 0;
+  cursor: nesw-resize;
+}
+.resize-handle.bottom-right {
+  bottom: 0; right: 0;
+  cursor: nwse-resize;
 }

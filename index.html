@@ -23,23 +23,23 @@
 
   <!-- Desktop -->
   <div id="desktop" class="hidden-icons">
-    <div class="icon" ondblclick="openWindow('welcome')">
+    <div class="icon" onclick="openWindow('welcome')">
       <img src="https://img.icons8.com/fluency-systems-regular/48/home.png" />
       <span>Welcome</span>
     </div>
-    <div class="icon" ondblclick="openWindow('projects')">
+    <div class="icon" onclick="openWindow('projects')">
       <img src="https://img.icons8.com/fluency-systems-regular/48/source-code.png" />
       <span>Projects</span>
     </div>
-    <div class="icon" ondblclick="openWindow('resume')">
+    <div class="icon" onclick="openWindow('resume')">
       <img src="https://img.icons8.com/fluency-systems-regular/48/resume.png" />
       <span>Resume</span>
     </div>
-    <div class="icon" ondblclick="openWindow('contact')">
+    <div class="icon" onclick="openWindow('contact')">
       <img src="https://img.icons8.com/fluency-systems-regular/48/send-mass-email.png" />
       <span>Contact</span>
     </div>
-    <div class="icon" ondblclick="openWindow('dino-game')">
+    <div class="icon" onclick="openWindow('dino-game')">
       <img src="https://img.icons8.com/?size=100&id=DYmiclhsSQLE&format=png&color=000000" />
       <span>Dino Game</span>
     </div>
@@ -65,6 +65,15 @@
       </div>
     </div>
   <div class="welcome-content">
+
+    <div class="resize-handle top"></div>
+    <div class="resize-handle right"></div>
+    <div class="resize-handle bottom"></div>
+    <div class="resize-handle left"></div>
+    <div class="resize-handle top-left"></div>
+    <div class="resize-handle top-right"></div>
+    <div class="resize-handle bottom-left"></div>
+    <div class="resize-handle bottom-right"></div>
 
     <!-- Profile Photo -->
     <div class="welcome-photo">
@@ -108,6 +117,16 @@
     </div>
     <div class="window-content">
 
+      <div class="resize-handle top"></div>
+      <div class="resize-handle right"></div>
+      <div class="resize-handle bottom"></div>
+      <div class="resize-handle left"></div>
+      <div class="resize-handle top-left"></div>
+      <div class="resize-handle top-right"></div>
+      <div class="resize-handle bottom-left"></div>
+      <div class="resize-handle bottom-right"></div>
+
+      <!-- Tabs -->
       <div class="project-tabs">
         <button class="tab-btn active" onclick="filterProjects('all')">All</button>
         <button class="tab-btn" onclick="filterProjects('web')">Web</button>
@@ -116,71 +135,91 @@
         <button class="tab-btn" onclick="filterProjects('ml')">Machine Learning</button>
       </div>
 
-      <div class="projects-grid">
-        <div class="project-card">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/code.png" alt="Portfolio">
-          <h3>Desktop Portfolio Website (2025)</h3>
-          <p>HTML | CSS | JavaScript</p>
-          <a href="https://github.com/bchung9/desktop-portfolio" target="_blank" class="project-link">View Project</a>
+      <!-- ✅ Categories -->
+      <div class="projects-container">
+
+        <!-- Web Projects -->
+        <h2 class="category-title">Web Projects</h2>
+        <div class="projects-grid" data-category="web">
+          <div class="project-card">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/code.png" alt="Portfolio">
+            <h3>Desktop Portfolio Website (2025)</h3>
+            <p>HTML | CSS | JavaScript</p>
+            <a href="https://github.com/bchung9/desktop-portfolio" target="_blank" class="project-link">View Project</a>
+          </div>
+
+          <div class="project-card">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/hospital-room.png" alt="Healthcare Website">
+            <h3>Viralidate - Healthcare Website (2024)</h3>
+            <p>React.js | HTML | CSS</p>
+            <a href="https://github.com/marendale/viralidate" target="_blank" class="project-link">View Project</a>
+          </div>
         </div>
 
-        <div class="project-card">
-          <img src="https://img.icons8.com/?size=100&id=98692&format=png&color=000000" alt="Portfolio">
-          <h3>Web Crawler & Visualizer(2025)</h3>
-          <p>Python</p>
-          <a href="https://github.com/bchung9/web-crawler" target="_blank" class="project-link">View Project</a>
+        <!-- Python Projects -->
+        <h2 class="category-title">Python Projects</h2>
+        <div class="projects-grid" data-category="python">
+          <div class="project-card">
+            <img src="https://img.icons8.com/?size=100&id=98692&format=png&color=000000" alt="Web Crawler">
+            <h3>Web Crawler & Visualizer (2025)</h3>
+            <p>Python</p>
+            <a href="https://github.com/bchung9/web-crawler" target="_blank" class="project-link">View Project</a>
+          </div>
+
+          <div class="project-card">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" alt="Process Manager">
+            <h3>Process Manager Program (2024)</h3>
+            <p>C | Python</p>
+            <a href="https://github.com/bchung9/process-manager" target="_blank" class="project-link">View Project</a>
+          </div>
+
+          <div class="project-card">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/calculator.png" alt="Calculator">
+            <h3>TI-84 Calculator (2023)</h3>
+            <p>Python</p>
+            <a href="https://github.com/bchung9/ti84-calculator" target="_blank" class="project-link">View Project</a>
+          </div>
+
+          <div class="project-card">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Lyric Retriever">
+            <h3>Lyric Retriever (2023)</h3>
+            <p>Python</p>
+            <a href="https://github.com/bchung9/lyric-retriever" target="_blank" class="project-link">View Project</a>
+          </div>
         </div>
 
-        <div class="project-card">
-          <img src="https://img.icons8.com/?size=100&id=10421&format=png&color=000000" alt="AI Project">
-          <h3>PDF Q&A Retrieval-Augmented Generator (2025)</h3>
-          <p>Ollama | LangChain | Python</p>
-          <a href="https://github.com/bchung9/pdf-rag" target="_blank" class="project-link">View Project</a>
+        <!-- Mobile Projects -->
+        <h2 class="category-title">Mobile Projects</h2>
+        <div class="projects-grid" data-category="mobile">
+          <div class="project-card">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/restaurant.png" alt="Food App">
+            <h3>Food Delivery Android App (2024)</h3>
+            <p>Flutter | Dart</p>
+            <a href="https://github.com/abbieg2014/food-delivery-app" target="_blank" class="project-link">View Project</a>
+          </div>
         </div>
 
-        <div class="project-card">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/restaurant.png" alt="Food App">
-          <h3>Food Delivery Android App (2024)</h3>
-          <p>Flutter | Dart</p>
-          <a href="https://github.com/abbieg2014/food-delivery-app" target="_blank" class="project-link">View Project</a>
+        <!-- Machine Learning Projects -->
+        <h2 class="category-title">Machine Learning Projects</h2>
+        <div class="projects-grid" data-category="ml">
+          <div class="project-card">
+            <img src="https://img.icons8.com/?size=100&id=10421&format=png&color=000000" alt="AI Project">
+            <h3>PDF Q&A Retrieval-Augmented Generator (2025)</h3>
+            <p>Ollama | LangChain | Python</p>
+            <a href="https://github.com/bchung9/pdf-rag" target="_blank" class="project-link">View Project</a>
+          </div>
+
+          <div class="project-card">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/brain.png" alt="Machine Learning">
+            <h3>ML Learning Classification & Estimation (2024)</h3>
+            <p>Python | PyTorch</p>
+            <a href="https://github.com/bchung9/machine-learning-project" target="_blank" class="project-link">View Project</a>
+          </div>
         </div>
 
-        <div class="project-card">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/brain.png" alt="Machine Learning">
-          <h3>ML Learning Classification & Estimation (2024)</h3>
-          <p>Python | PyTorch</p>
-          <a href="https://github.com/bchung9/machine-learning-project" target="_blank" class="project-link">View Project</a>
-        </div>
-
-        <div class="project-card">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/hospital-room.png" alt="Healthcare Website">
-          <h3>Viralidate - Healthcare Website (2024)</h3>
-          <p>React.js | HTML | CSS</p>
-          <a href="https://github.com/marendale/viralidate" target="_blank" class="project-link">View Project</a>
-        </div>
-
-        <div class="project-card">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" alt="Process Manager">
-          <h3>Process Manager Program (2024)</h3>
-          <p>C | Python</p>
-          <a href="https://github.com/bchung9/process-manager" target="_blank" class="project-link">View Project</a>
-        </div>
-
-        <div class="project-card">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/calculator.png" alt="Calculator">
-          <h3>TI-84 Calculator (2023)</h3>
-          <p>Python</p>
-          <a href="https://github.com/bchung9/ti84-calculator" target="_blank" class="project-link">View Project</a>
-        </div>
-
-        <div class="project-card">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Lyric Retriever">
-          <h3>Lyric Retriever (2023)</h3>
-          <p>Python</p>
-          <a href="https://github.com/bchung9/lyric-retriever" target="_blank" class="project-link">View Project</a>
-        </div>
       </div>
     </div>
+
   </div>
 
   <!-- Resume Window -->
@@ -194,6 +233,15 @@
         </div>
       </div>
       <div class="window-content">
+
+        <div class="resize-handle right"></div>
+        <div class="resize-handle bottom"></div>
+        <div class="resize-handle left"></div>
+        <div class="resize-handle top-left"></div>
+        <div class="resize-handle top-right"></div>
+        <div class="resize-handle bottom-left"></div>
+        <div class="resize-handle bottom-right"></div>
+
         <div class="resume-frame-wrapper">
           <iframe src="assets/Chung_Brandon_Resume.pdf" class="resume-pdf" frameborder="0"></iframe>
           <p>
@@ -219,6 +267,14 @@
       </div>
     </div>
     <div class="window-content contact-container">
+      <div class="resize-handle right"></div>
+      <div class="resize-handle bottom"></div>
+      <div class="resize-handle left"></div>
+      <div class="resize-handle top-left"></div>
+      <div class="resize-handle top-right"></div>
+      <div class="resize-handle bottom-left"></div>
+      <div class="resize-handle bottom-right"></div>
+
       <div class="contact-item">
         <i class="fas fa-envelope contact-icon"></i>
         <span>Email:</span>
@@ -255,6 +311,15 @@
       </div>
     </div>
     <div class="window-content">
+
+      <div class="resize-handle right"></div>
+      <div class="resize-handle bottom"></div>
+      <div class="resize-handle left"></div>
+      <div class="resize-handle top-left"></div>
+      <div class="resize-handle top-right"></div>
+      <div class="resize-handle bottom-left"></div>
+      <div class="resize-handle bottom-right"></div>
+      
       <div id="game-container">
         <div id="clouds" src="sprites/cloud.png" alt="cloud"></div>
         <img id="dino" src="sprites/dino.png" alt="dino" />

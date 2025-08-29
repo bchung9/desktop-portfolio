@@ -413,19 +413,71 @@ function playClickSound() {
 }
 
 function filterProjects(category) {
-  const cards = document.querySelectorAll(".project-card");
+  const sections = document.querySelectorAll(".projects-grid");
   const tabs = document.querySelectorAll(".tab-btn");
 
   // Highlight active tab
   tabs.forEach(tab => tab.classList.remove("active"));
   document.querySelector(`.tab-btn[onclick="filterProjects('${category}')"]`).classList.add("active");
 
-  // Show/Hide projects
-  cards.forEach(card => {
-    if (category === "all" || card.dataset.category === category) {
-      card.style.display = "block";
+  // Show/Hide categories
+  sections.forEach(section => {
+    if (category === "all" || section.dataset.category === category) {
+      section.style.display = "grid";
+      section.previousElementSibling.style.display = "block"; // show title
     } else {
-      card.style.display = "none";
+      section.style.display = "none";
+      section.previousElementSibling.style.display = "none"; // hide title
     }
   });
 }
+
+document.querySelectorAll('.window').forEach(win => {
+  const handles = win.querySelectorAll('.resize-handle');
+  handles.forEach(handle => {
+    handle.addEventListener('mousedown', e => {
+      e.preventDefault();
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const startWidth = win.offsetWidth;
+      const startHeight = win.offsetHeight;
+      const startLeft = win.offsetLeft;
+      const startTop = win.offsetTop;
+
+      function resizeMove(ev) {
+        let newWidth = startWidth;
+        let newHeight = startHeight;
+        let newLeft = startLeft;
+        let newTop = startTop;
+
+        if (handle.classList.contains('right')) {
+          newWidth = startWidth + (ev.clientX - startX);
+        }
+        if (handle.classList.contains('bottom')) {
+          newHeight = startHeight + (ev.clientY - startY);
+        }
+        if (handle.classList.contains('left')) {
+          newWidth = startWidth - (ev.clientX - startX);
+          newLeft = startLeft + (ev.clientX - startX);
+        }
+        if (handle.classList.contains('top')) {
+          newHeight = startHeight - (ev.clientY - startY);
+          newTop = startTop + (ev.clientY - startY);
+        }
+
+        win.style.width = newWidth + 'px';
+        win.style.height = newHeight + 'px';
+        win.style.left = newLeft + 'px';
+        win.style.top = newTop + 'px';
+      }
+
+      function stopResize() {
+        document.removeEventListener('mousemove', resizeMove);
+        document.removeEventListener('mouseup', stopResize);
+      }
+
+      document.addEventListener('mousemove', resizeMove);
+      document.addEventListener('mouseup', stopResize);
+    });
+  });
+});
