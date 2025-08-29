@@ -10,7 +10,7 @@ This project recreates the feel of a mini operating system directly in the brows
 
 - **Desktop UI Simulation**
 
-  - Windows for **Welcome, Projects, Resume, Contact**
+  - Windows for **Welcome, Projects, Resume, Contact, Dino Game**
   - Draggable, minimizable, maximizable, and closable windows
   - Taskbar for active window management
 
@@ -24,7 +24,7 @@ This project recreates the feel of a mini operating system directly in the brows
 
   - Playable mini-game inside its own window
   - Fresh game state every time you reopen
-  - Spacebar controls only active while game window is open
+  - Spacebar & Touch Screen controls only active while game window is open
 
 - **Resume Viewer**
 
@@ -41,8 +41,9 @@ This project recreates the feel of a mini operating system directly in the brows
 
 ## 🛠️ Tech Stack
 
-- **HTML5** – Structure
+- **HTML** – Structure
 - **CSS** – Styling & Layout
 - **JavaScript** – Window management, audio, game logic
 
 ---
+
