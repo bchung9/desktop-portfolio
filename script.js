@@ -147,6 +147,9 @@ function startExperience() {
     desktop.classList.remove('hidden-icons');
     setTimeout(() => {
       desktop.classList.add('show-icons');
+
+      // ✅ Open Welcome window automatically
+      openWindow('welcome');
     }, 100);
   }, 500);
 }
@@ -407,4 +410,22 @@ function playClickSound() {
     clickSound.currentTime = 0;
     clickSound.play();
   }
+}
+
+function filterProjects(category) {
+  const cards = document.querySelectorAll(".project-card");
+  const tabs = document.querySelectorAll(".tab-btn");
+
+  // Highlight active tab
+  tabs.forEach(tab => tab.classList.remove("active"));
+  document.querySelector(`.tab-btn[onclick="filterProjects('${category}')"]`).classList.add("active");
+
+  // Show/Hide projects
+  cards.forEach(card => {
+    if (category === "all" || card.dataset.category === category) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
 }
