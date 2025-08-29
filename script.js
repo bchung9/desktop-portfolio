@@ -197,7 +197,7 @@ function minimizeWindow(id) {
     btn.classList.add('taskbar-icon');
     btn.title = id.charAt(0).toUpperCase() + id.slice(1);
 
-    const desktopIcon = document.querySelector(`.icon[ondblclick*="${id}"] img`);
+    const desktopIcon = document.querySelector(`.icon[onclick*="${id}"] img`);
     const iconImg = document.createElement('img');
     iconImg.src = desktopIcon ? desktopIcon.src : '';
     btn.appendChild(iconImg);
