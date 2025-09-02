@@ -42,6 +42,7 @@ function closeWindow(id) {
 
   if (id === "dino-game") {
     gameOver = true;
+    pauseDinoGame(); // ensure loop is stopped
   }
 }
 
@@ -190,6 +191,11 @@ function minimizeWindow(id) {
   const w = document.getElementById(id);
   w.style.display = 'none';
 
+  // ✅ Pause Dino game when minimized
+  if (id === "dino-game") {
+    pauseDinoGame();
+  }
+
   const taskbar = document.getElementById('taskbar-apps');
   if (!document.getElementById(`tb-${id}`)) {
     const btn = document.createElement('button');
@@ -214,6 +220,11 @@ function restoreWindow(id) {
   const w = document.getElementById(id);
   w.style.display = 'block';
   w.style.zIndex = ++highestZ;
+
+  // ✅ Resume Dino game when restored
+  if (id === "dino-game") {
+    resumeDinoGame();
+  }
 }
 
 let windowState = {};
@@ -262,6 +273,9 @@ let gameOver = false;
 let cactusSpeed = 2;
 let jumpDuration = 600; // in milliseconds
 let jumpHeight = 220; // in pixels
+
+let dinoLoopActive = false;
+let dinoLoopId = null;
 
 const jumpSound = new Audio("sounds/jump.mp3");
 const pointSound = new Audio("sounds/point.mp3");
@@ -342,7 +356,7 @@ gameContainer.addEventListener("touchstart", function(e) {
 let lastTime = null;
 
 function moveCactus(time) {
-  if (gameOver) return;
+  if (gameOver || !dinoLoopActive) return;
 
   if (!lastTime) lastTime = time;
   const deltaTime = (time - lastTime) / 1000; // seconds
@@ -378,11 +392,12 @@ function moveCactus(time) {
     return;
   }
 
-  requestAnimationFrame(moveCactus);
+  dinoLoopId = requestAnimationFrame(moveCactus);
 }
 
 function endGame() {
   gameOver = true;
+  pauseDinoGame();
   gameOverSound.currentTime = 0;
   gameOverSound.play();
   const overlay = document.createElement("div");
@@ -401,7 +416,24 @@ function initDinoGame() {
   const overlay = document.querySelector(".dino-over");
   if (overlay) overlay.remove();
 
-  requestAnimationFrame(moveCactus);
+  lastTime = null;
+  dinoLoopActive = true;
+  dinoLoopId = requestAnimationFrame(moveCactus);
+}
+
+function pauseDinoGame() {
+  dinoLoopActive = false;
+  if (dinoLoopId) {
+    cancelAnimationFrame(dinoLoopId);
+    dinoLoopId = null;
+  }
+}
+
+function resumeDinoGame() {
+  if (!dinoLoopActive && !gameOver) {
+    dinoLoopActive = true;
+    dinoLoopId = requestAnimationFrame(moveCactus);
+  }
 }
 
 function playClickSound() {
