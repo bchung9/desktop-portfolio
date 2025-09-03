@@ -17,7 +17,7 @@ This project recreates the feel of a mini operating system directly in the brows
 - **Now Playing Widget**
 
   - Background music with real-time volume control
-  - Slider synced to audio volume (default: 25%)
+  - Slider synced to audio volume (default: 15%)
   - Persistent audio state while navigating windows
 
 - **Retro Dino Game Clone**
@@ -46,4 +46,5 @@ This project recreates the feel of a mini operating system directly in the brows
 - **JavaScript** – Window management, audio, game logic
 
 ---
+
 
