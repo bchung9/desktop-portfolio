@@ -41,10 +41,11 @@ This project recreates the feel of a mini operating system directly in the brows
 
 ## 🛠️ Tech Stack
 
-- **HTML** – Structure
+- **HTML5** – Structure
 - **CSS** – Styling & Layout
 - **JavaScript** – Window management, audio, game logic
 
 ---
+
 
 
